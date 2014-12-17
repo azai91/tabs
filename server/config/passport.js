@@ -1,7 +1,7 @@
 var LocalStrategy = require('passport-local').Strategy,
-    User = require('./users/userModel');
+    User          = require('../users/userModel');
 
-module.exports = function (passport) {
+module.exports = function(passport) {
 
   //passes user id between server and client instead of entire object
   passport.serializeUser(function(user, done) {
