@@ -1,17 +1,15 @@
-//need User Model. User instance needs to have a verifyPassword method
-
 var LocalStrategy = require('passport-local').Strategy,
-    User = require(''), //REFERENCE USER
+    User = require('./users/userModel');
 
 module.exports = function (passport) {
 
   //passes user id between server and client instead of entire object
-  passport.serializeUser(function (user, done) {
+  passport.serializeUser(function(user, done) {
     done(null, user.id);
   });
 
   //fetches user when client sends cookie to server
-  passport.deserializeUser(function (id, done) {
+  passport.deserializeUser(function(id, done) {
     User.findById(id, function (err, user) {
       done(err, user);
     });
@@ -22,19 +20,22 @@ module.exports = function (passport) {
       passwordField: 'password'
     },
     function(email, password, done) {
-      User.findOne({email: email}, function (err, user) {
+      User.findOne({email: email}, function(err, user) {
         if (err) {
           return done(err);
         }
 
         //if email already in database then send message back
-        if (email) {
-          return done(null, null, { message: 'Email Already Used'});
+        if (user) {
+          return done(null, false, { message: 'Email Already Used'});
         }
 
         // if email is not used then proocess to next
-        if (!email) {
-          return done(null, user);
+        if (!user) {
+          User.create({email: email, password: password}, function(err, createdUser) {
+
+            return done(null, createdUser);
+          });
         }
       });
     }
@@ -45,7 +46,7 @@ module.exports = function (passport) {
       passwordField: 'password'
     },
     function(email, password, done) {
-      User.findOne({email: email}, function (err, user) {
+      User.findOne({email: email}, function(err, user) {
         if (err) {
           return done(err);
         }
@@ -56,13 +57,13 @@ module.exports = function (passport) {
             return done(null, user);
           }
           if (!user.verifyPassword(password)) {
-            return done(null, null, { message: 'incorrect password'});
+            return done(null, false, { message: 'incorrect password'});
           }
         }
 
         //cannot find user
         if (!user) {
-          return done(null, null, { message: 'cannot find user'});
+          return done(null, false, { message: 'cannot find user'});
         }
       });
     }
