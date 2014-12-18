@@ -14,21 +14,14 @@ var userSchema = mongoose.Schema({
 	},
 	firstName: {
 		type: String,
-		required: true
 	},
 	lastName: {
 		type: String,
-		required: true
 	},
 	status: {
 		type: String,
-		required: true
 	},
-	offerings: [];
-	image: {
-		type: String,
-		required: true
-	},
+	offerings: [],
 	dateCreated: {
 		type: Date,
 		required: true,
