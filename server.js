@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var logStream = fs.createWriteStream(__dirname + '/logfile.log', {flags: 'a'})
 
 // setup the logger
-app.use(morgan('dev', {stream: accessLogStream}))
+app.use(morgan('dev', {stream: logStream}))
 
 app.use(cookieParser());
 app.use(bodyParser());
@@ -46,7 +46,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // accepts query for a skill and returns an array of users who teach that skill
-app.post('/', userController.searchForSkill);
+app.post('/search', userController.searchForSkill);
 
 // returns conversations array for the user
 app.get('/messages', userController.isLoggedIn, conversationController.getConversations);

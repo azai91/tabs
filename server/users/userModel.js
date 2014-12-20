@@ -1,5 +1,5 @@
 var mongoose = require('mongoose')
-		bcrypt   = require('bcrypt-nodejs');
+	bcrypt   = require('bcrypt-nodejs');
 
 // define user schema
 var userSchema = mongoose.Schema({
@@ -9,8 +9,7 @@ var userSchema = mongoose.Schema({
 	},
 	password: {
 		type: String,
-		required: true,
-		select: false
+		required: true
 	},
 	firstName: String,
 	lastName: String,
