@@ -4,18 +4,18 @@ var messageController = {};
 messageController.saveMessage = saveMessage;
 
 //formatting of what's in req important
-function saveMessage(req, res) {
+function saveMessage(req, res, next) {
   var senderId = req.body.senderId,
       recipientId = req.body.recipientId,
       message = req.body.message,
-      conversationId = req.body.conversationId 
+      conversationId = req.body.conversationId
   Message.create({
-    senderId: senderId, 
+    senderId: senderId,
     recipientId: recipientId,
     message: message
   }, function(err, newMessage) {
     if (err) {
-      throw err
+      throw err;
     } else {
       req.body.newMessageId = newMessage._id;
       next();

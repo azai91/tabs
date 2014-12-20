@@ -1,6 +1,6 @@
 var Conversation = require('./conversationModel');
 
-var conversationController = {};
+var ConversationController = {};
 ConversationController.getConversations = getConversations;
 ConversationController.saveToConversation = saveToConversation;
 
@@ -18,12 +18,14 @@ function saveToConversation(req, res) {
   var senderId = req.body.senderId,
       recipientId = req.body.recipientId,
       newMessageId = req.body.newMessageId;
-  Conversation.update({ $or: [ 
+  Conversation.update({ $or: [
     { $and: [ { initiator: senderId }, { responder: recipientId } ] },
-    { $and: [ { initiator: recipientId }, { responder: senderId } ] } 
-    ] }, 
-    { $push: { messages: newMessageId } }, function(err, numberAffected, raw) {
+    { $and: [ { initiator: recipientId }, { responder: senderId } ] }
+    ] },
+    { $push: { messages: newMessageId } },
+    function(err, numberAffected, raw) {
       if (err) throw err; //not sure what to do with error
-});
+  });
+}
 
-module.exports = conversationController;
+module.exports = ConversationController;

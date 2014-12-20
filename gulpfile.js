@@ -4,6 +4,7 @@ var source = require('vinyl-source-stream'); // Used to stream bundle for furthe
 var browserify = require('browserify');
 var watchify = require('watchify');
 var reactify = require('reactify');
+var nodemon = require('gulp-nodemon');
 
 // gulp
 //   .task('default', $.sequence('styles', 'browserify', 'bower', 'server', 'watch'))
@@ -12,7 +13,9 @@ var reactify = require('reactify');
 //   .task('server', server)
 //   .task('watch', watch);
 //
-gulp.task('browserify', scripts);
+gulp
+  .task('browserify', scripts)
+  .task('serve', serve);
 
 var paths = {
 
@@ -45,6 +48,10 @@ function scripts() {
   .bundle()
   .pipe(source('bundle.js'))
   .pipe(gulp.dest('./build/'));
+}
+
+function serve() {
+  nodemon({script: 'server.js'});
 }
 
 gulp.task('default', ['browserify']);
