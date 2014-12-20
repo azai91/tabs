@@ -9,7 +9,11 @@ function saveMessage(req, res) {
       recipientId = req.body.recipientId,
       message = req.body.message,
       conversationId = req.body.conversationId 
-  Message.create({senderId: senderId, recipientId: recipientId, message: message}, function(err, newMessage) {
+  Message.create({
+    senderId: senderId, 
+    recipientId: recipientId,
+    message: message
+  }, function(err, newMessage) {
     if (err) {
       throw err
     } else {
