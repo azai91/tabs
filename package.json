@@ -16,6 +16,14 @@
     "express-session": "^1.9.3",
     "mongoose": "^3.8.20",
     "passport": "^0.2.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "react": "^0.12.2"
+  },
+  "devDependencies": {
+    "browserify": "^7.0.3",
+    "gulp": "^3.8.10",
+    "reactify": "^0.17.1",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "^2.2.1"
   }
 }
