@@ -9,23 +9,14 @@ var userSchema = mongoose.Schema({
 	},
 	password: {
 		type: String,
-		required: true
-	},
-	firstName: {
-		type: String,
-	},
-	lastName: {
-		type: String,
-	},
-	status: {
-		type: String,
-	},
-	offerings: [],
-	dateCreated: {
-		type: Date,
 		required: true,
-		default: Date.now
-	}
+		select: false
+	},
+	firstName: String,
+	lastName: String,
+	status: String,
+	skills: [],
+	interests: String
 });
 
 // checks if the user-input password is correct, returns a boolean
