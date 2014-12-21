@@ -52,7 +52,7 @@ function searchForSkill(req, res) {
   UserGroup.find({ skills: { $elemMatch: skill} })
     .populate('email firstName lastName status skills interests')
     .exec(function(error, results) {
-      res.end(results);
+      res.send(results);
   });
 };
 
