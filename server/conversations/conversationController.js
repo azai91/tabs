@@ -1,8 +1,8 @@
 var Conversation = require('./conversationModel');
 
-var ConversationController = {};
-ConversationController.getConversations = getConversations;
-ConversationController.saveToConversation = saveToConversation;
+var conversationController = {};
+conversationController.getConversations = getConversations;
+conversationController.saveToConversation = saveToConversation;
 
 // returns an array of all conversations that the user is a part of
 function getConversations(req, res){
@@ -26,6 +26,6 @@ function saveToConversation(req, res) {
     function(err, numberAffected, raw) {
       if (err) throw err; //not sure what to do with error
   });
-}
+};
 
-module.exports = ConversationController;
+module.exports = conversationController;
