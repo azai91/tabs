@@ -1,5 +1,6 @@
-var mongoose = require('mongoose');
-var Message = require('./messages/messageModel'); //not sure if need this here
+var mongoose = require('mongoose'),
+	Schema = mongoose.Schema;
+// var Message = require('./messages/messageModel'); //not sure if need this here
 
 // define conversation schema
 var conversationSchema = mongoose.Schema({
