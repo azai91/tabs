@@ -34,7 +34,6 @@ var logStream = fs.createWriteStream(__dirname + '/logfile.log', {flags: 'a'})
 app.use(morgan('dev', {stream: logStream}))
 
 app.use(cookieParser());
-app.use(bodyParser());
 
 app.use(session({
 // does it matter what the secret is?

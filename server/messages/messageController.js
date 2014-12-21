@@ -8,11 +8,13 @@ function saveMessage(req, res, next) {
   var senderId = req.body.senderId,
       recipientId = req.body.recipientId,
       message = req.body.message,
-      conversationId = req.body.conversationId
+      conversationId = req.body.conversationId;
+
   Message.create({
     senderId: senderId,
     recipientId: recipientId,
-    message: message
+    message: message,
+    conversationId: conversationId
   }, function(err, newMessage) {
     if (err) {
       throw err;

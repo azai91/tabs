@@ -1,6 +1,5 @@
-var mongoose = require('mongoose');
-var Conversation = require('../conversations/conversationModel'); //do i need this for the conversation id? try without it
-var User = require('../users/userModel'); //do i need this for the user id? try without it
+var mongoose = require('mongoose'),
+	Schema = mongoose.Schema;
 
 // define message schema
 var messageSchema = mongoose.Schema({
