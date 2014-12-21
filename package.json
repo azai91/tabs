@@ -22,9 +22,12 @@
   },
   "devDependencies": {
     "browserify": "^7.0.3",
+    "chai": "^1.10.0",
     "gulp": "^3.8.10",
     "gulp-nodemon": "^1.0.4",
+    "mocha": "^2.0.1",
     "reactify": "^0.17.1",
+    "supertest": "^0.15.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.2.1"
   }
