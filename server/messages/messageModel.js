@@ -4,13 +4,13 @@ var User = require('../users/userModel'); //do i need this for the user id? try 
 
 // define message schema
 var messageSchema = mongoose.Schema({
-	senderId: { type: Schema.Types.ObjectId, ref: 'User' },
-	recipientId: { type: Schema.Types.ObjectId, ref: 'User' },
+	senderId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+	recipientId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 	message: {
 		type: String,
 		required: true
 	},
-	conversationId: { type: Schema.Types.ObjectId, ref: 'Conversation' }
+	conversationId: { type: mongoose.Schema.Types.ObjectId, ref: 'Conversation' }
 });
 
 // compile message schema into a message model
