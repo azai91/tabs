@@ -2,6 +2,7 @@ var express       = require('express'),
     path          = require('path'),
     fs            = require('fs'),
     mongoose      = require('mongoose'),
+    morgan        = require('morgan'),
     passport      = require('passport'),
     cookieParser  = require('cookie-parser'),
     bodyParser    = require('body-parser'),
@@ -33,7 +34,6 @@ var logStream = fs.createWriteStream(__dirname + '/logfile.log', {flags: 'a'})
 app.use(morgan('dev', {stream: logStream}))
 
 app.use(cookieParser());
-app.use(bodyParser());
 
 app.use(session({
 // does it matter what the secret is?
@@ -52,7 +52,7 @@ app.post('/search', userController.searchForSkill);
 app.get('/messages', userController.isLoggedIn, conversationController.getConversations);
 
 // adds incoming message to database if user is logged in
-app.post('/messages', userController.isLoggedIn, messageController.saveMessage, conversationController.addMessage});
+app.post('/messages', userController.isLoggedIn, messageController.saveMessage, conversationController.saveToConversation);
 
 // signs up new user and adds all details
 app.post('/signup', passport.authenticate('local-signup'), userController.addRemainingDetails);
