@@ -24,6 +24,7 @@ var FluxMessageApp = React.createClass({
 
   // Remove change listeners from stores
   componentWillUnmount: function() {
+    console.log('unmount');
     MessageStore.removeChangeListener(this._onChange);
   },
 
