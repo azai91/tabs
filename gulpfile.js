@@ -9,19 +9,15 @@ var sass = require('gulp-sass');
 var livereload = require('gulp-livereload');
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
+var plumber = require('gulp-plumber');
 
-// gulp
-//   .task('default', $.sequence('styles', 'browserify', 'bower', 'server', 'watch'))
-//   .task('styles', styles)
-//   .task('browserify', browserify)
-//   .task('server', server)
-//   .task('watch', watch);
-//
 gulp
   .task('browserify', scripts)
   .task('serve', serve)
   .task('styles', styles)
   .task('watch', watch);
+
+gulp.task('default', ['styles', 'watch', 'browserify']);
 
 var paths = {
   script: './client/app/app.jsx',
@@ -44,15 +40,16 @@ function scripts() {
   return watcher
   .on('update', function() {
     var updateStart = Date.now();
-    console.log('updating');
+    console.log('Updating scripts');
     watcher.bundle()
     .pipe(source('bundle.js'))
 
     //add uglify here
+    .pipe(plumber())
     .pipe(gulp.dest('./build/'))
     .pipe(livereload());
 
-    console.log('Updated!', (Date.now() - updateStart)  +'ms');
+    console.log('Updated scripts!', (Date.now() - updateStart)  +'ms');
   })
   .bundle()
   .pipe(source('bundle.js'))
@@ -64,8 +61,18 @@ function serve() {
 }
 
 function styles() {
+  var updateStart = Date.now();
+  console.log('Updating styles');
+
   return gulp.src(paths.styles)
-        .pipe(sass())
+        .pipe(sourcemaps.init())
+        .pipe(sass({
+          errLogToConsole: true,
+          onSuccess: function(css) {
+            console.log('Updated styles!', (Date.now() - updateStart)  +'ms');
+          }
+        }))
+        .pipe(sourcemaps.write())
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false
@@ -78,5 +85,3 @@ function watch() {
   livereload.listen();
   gulp.watch(paths.styles, styles);
 }
-
-gulp.task('default', ['styles', 'watch', 'browserify']);
