@@ -26,11 +26,12 @@ var MessageStore = _.extend({}, EventEmitter.prototype, {
     return _messages;
   },
 
-  // Which message is currently open
+  // Returns the index of the message that is currently open
   getSelectedIndex: function() {
     return _selectedMessageIndex;
   },
 
+  // Emit change for views to listen to
   emitChange: function() {
     this.emit('change');
   },
@@ -40,7 +41,7 @@ var MessageStore = _.extend({}, EventEmitter.prototype, {
   },
 
   removeChangeListener: function(callback) {
-    this.removeChangeListener('change', callback);
+    this.removeListener('change', callback);
   }
 
 });
