@@ -1,28 +1,30 @@
-var React = require('react'),
-    FluxMessageActions = require('../actions/FluxMessageActions');
+var React = require('react');
 
 var FluxMessage = React.createClass({
 
   sendMessage: function(e) {
     e.preventDefault();
-    var message = this.refs.message.getDOMNode().value.trim();
+    var body = this.refs.message.getDOMNode().value.trim();
 
     var data = {
-      message: message,
-      status: 'sent'
+      body: body,
+      status: 'sent',
+      recipientId: this.props.currentConversation.withId,
+      conversationId: this.props.currentConversation.conversationId
     };
 
-    FluxMessageActions.sendMessage(data, this.props.index);
+    console.log('data', data);
+    this.props.sendMessage(data, this.props.index);
     this.refs.message.getDOMNode().value = "";
   },
 
   render: function() {
-    var currentMessage = this.props.currentMessage.conversation;
+    var currentMessage = this.props.currentConversation.messages;
     var conversation = currentMessage.map(function(data, index) {
 
       return (
-        <li className={data.status} >{data.message}</li>
-      )
+        <li className={data.status} key={data.messageID} >{data.body}</li>
+      );
     });
 
     return (
@@ -35,7 +37,7 @@ var FluxMessage = React.createClass({
           <input type="submit" value="submit"/>
         </form>
       </div>
-    )
+    );
   }
 });
 

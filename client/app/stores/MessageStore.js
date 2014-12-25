@@ -4,11 +4,11 @@ var FluxMessageConstants = require('../constants/FluxMessageConstants');
 var _ = require('lodash');
 
 // Define inital data points
-var _messages = [],
+var _conversations = [],
     _selectedMessageIndex = 0;
 
 function loadMessagesData(data) {
-  _messages = data;
+  _conversations = data;
 }
 
 function setSelected(index) {
@@ -17,17 +17,17 @@ function setSelected(index) {
 
 function addMessageToSelected(data, index) {
 
-  console.log(_messages[index]);
-  _messages[index].conversation.push(data);
+  console.log(_conversations[index]);
+  _conversations[index].messages.push(data);
 }
 
 var MessageStore = _.extend({}, EventEmitter.prototype, {
-  getMessageList: function() {
-    return _messages;
+  getConversationList: function() {
+    return _conversations;
   },
 
   // Returns the index of the message that is currently open
-  getSelectedIndex: function() {
+  getSelectedConversationIndex: function() {
     return _selectedMessageIndex;
   },
 

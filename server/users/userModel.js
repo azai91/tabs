@@ -16,7 +16,8 @@ var userSchema = new Schema({
   lastName: String,
   status: String,
   skills: [],
-  interests: String
+  interests: String,
+  conversations: [{ type: Schema.Types.ObjectId, ref: 'Conversation' }]
 });
 
 // checks if the user-input password is correct, returns a boolean

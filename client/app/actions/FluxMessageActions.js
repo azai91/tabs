@@ -1,6 +1,5 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var FluxMessageConstants = require('../constants/FluxMessageConstants');
-
 var FluxMessageActions = {
 
   // Receive messages from API
@@ -18,6 +17,7 @@ var FluxMessageActions = {
     });
   },
 
+  // Will POST message to server and re-render view if POST successful
   sendMessage: function(message, index) {
     AppDispatcher.handleAction({
       actionType: FluxMessageConstants.ADD_MESSAGE,

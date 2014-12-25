@@ -4,11 +4,17 @@ var mongoose = require('mongoose'),
 
 mongoose.connect('mongodb://localhost/tabs');
 
-User.remove({}, function(err) {
-  console.log('Database cleared');
-})
+
 
 describe('User Model Spec', function() {
+
+  before(function(done) {
+    User.remove({}, function(err) {
+      console.log('User Database cleared');
+      done();
+    })
+  });
+
   it('should successfully create a user', function(done) {
     User.create({email: 'kirby8u@hotmail.com', password: 'hackreactor'}, function(err, user) {
       User.findOne({email: 'kirby8u@hotmail.com'}, function(err, user) {

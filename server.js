@@ -16,13 +16,7 @@ var app = express();
 
 mongoose.connect(mongoURI.URI);
 
-// var db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function () {
-//   console.log('Mongodb connection open');
-// });
-
-app.use(express.static(path.join(__dirname, "../client")));
+app.use(express.static(path.join(__dirname)));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -45,17 +39,26 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+require('./server/config/passport')(passport);
+
 // accepts query for a skill and returns an array of users who teach that skill
 app.post('/search', userController.searchForSkill);
 
 // returns conversations array for the user
-app.get('/messages', userController.isLoggedIn, conversationController.getConversations);
+// app.get('/messages', userController.isLoggedIn, conversationController.getConversations);
+app.get('/messages', conversationController.getConversations);
+
 
 // adds incoming message to database if user is logged in
-app.post('/messages', userController.isLoggedIn, messageController.saveMessage, conversationController.saveToConversation);
+app.post('/messages', userController.isLoggedIn, conversationController.saveToConversation);
+
 
 // signs up new user and adds all details
-app.post('/signup', passport.authenticate('local-signup'), userController.addRemainingDetails);
+// app.post('/signup', passport.authenticate('local-signup'), userController.addRemainingDetails);
+app.post('/signup', passport.authenticate('local-signup'), function(req, res) {
+  res.send('signup successful');
+});
+
 
 // uses passport local-login strategy to authenticate on login
 app.post('/login', passport.authenticate('local-login', {
