@@ -9,6 +9,7 @@ var React = require('react');
 
 // Components
 var FluxMessageApp = require('./components/FluxMessageApp.react');
+var FluxHomeApp = require('./components/FluxHomeApp.react');
 
 var Home = React.createClass({
   render: function() {
@@ -20,6 +21,7 @@ var Home = React.createClass({
           </ul>
         </header>
         <RouteHandler/>
+
       </div>
     );
   }
@@ -29,7 +31,8 @@ var TestHome = React.createClass({
   render: function() {
     return (
       <div>
-        This is the home page
+          Home Feed
+         <FluxHomeApp/>
       </div>
     );
   }
