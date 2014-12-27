@@ -8,7 +8,7 @@ var UserAPI = require('./utils/UserAPI');
 var Router = require('react-router');
 var routes = require('./routes');
 
-// Adds messagse to MessageStore
+// Adds messages to MessageStore
 MessageAPI.getMessageData();
 UserAPI.getUserData();
 

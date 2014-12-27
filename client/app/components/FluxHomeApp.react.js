@@ -26,8 +26,7 @@ var FluxHomeApp = React.createClass({
     var currentProfile = this.state.profList[selectedProfIndex];
     return (
       <div className="all-profiles">
-         <FluxProfileList profList={this.state.profList} />
-      HELLO
+         <FluxProfileList profList={this.state.profList}/>
       </div>
     );
   },
