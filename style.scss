@@ -47,13 +47,18 @@ html, body {
   height: 100%;
 }
 
-
-
-
-
 $widthOfList: 300px;
 $widthOfSubmit: 110px;
 $heightOfInput: 20px;
+
+.flux-home-app {
+  height: 100%;
+}
+
+.flux-profile-list-item {
+    border: black 1px solid;
+
+}
 
 .flux-message-app {
   height: 100%;
