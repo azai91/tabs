@@ -21,27 +21,16 @@ var Home = React.createClass({
           </ul>
         </header>
         <RouteHandler/>
-
       </div>
     );
   }
 });
 
-var TestHome = React.createClass({
-  render: function() {
-    return (
-      <div>
-          Home Feed
-         <FluxHomeApp/>
-      </div>
-    );
-  }
-});
 
 var routes = (
   <Route name="app" path="/" handler={Home}>
     <Route name="messages" handler={FluxMessageApp}/>
-    <DefaultRoute handler={TestHome}/>
+    <DefaultRoute handler={FluxHomeApp}/>
   </Route>
 );
 

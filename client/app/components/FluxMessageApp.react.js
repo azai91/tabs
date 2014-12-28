@@ -5,6 +5,7 @@ var FluxMessageList = require('./FluxMessageList.react');
 var FluxMessageView = require('./FluxMessageView.react');
 
 function getMessagesState() {
+
   return {
     messageList: MessageStore.getMessageList(),
     selectedMessageIndex: MessageStore.getSelectedIndex()
@@ -32,6 +33,7 @@ var FluxMessageApp = React.createClass({
   render: function() {
     var selectedMessageIndex = this.state.selectedMessageIndex;
     var currentMessage = this.state.messageList[selectedMessageIndex];
+
     return (
       <div className="flux-message-app">
         <FluxMessageList messages={this.state.messageList} />

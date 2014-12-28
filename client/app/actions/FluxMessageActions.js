@@ -6,7 +6,7 @@ var FluxMessageActions = {
   // Receive messages from API
   receiveMessages: function(data) {
     AppDispatcher.handleAction({
-      actionType: FluxMessageConstants.RECEIVE_DATA,
+      actionType: FluxMessageConstants.RECEIVE_MESSAGE_DATA,
       data: data
     });
   },

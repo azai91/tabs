@@ -6,7 +6,7 @@ var FluxUserActions = {
   // Receive users from API
   receiveUsers: function(data) {
     AppDispatcher.handleAction({
-      actionType: FluxUserConstants.RECEIVE_DATA,
+      actionType: FluxUserConstants.RECEIVE_USER_DATA,
       data: data
     });
   },

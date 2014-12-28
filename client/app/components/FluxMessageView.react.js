@@ -17,7 +17,6 @@ var FluxMessage = React.createClass({
   },
 
   render: function() {
-
     var currentMessage = this.props.currentMessage.conversation;
     var conversation = currentMessage.map(function(data, index) {
 
