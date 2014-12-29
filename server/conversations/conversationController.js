@@ -10,7 +10,7 @@ function getConversations(req, res){
 
 // query for all conversations where the user is the initiator or the responder, send all of the messages back
   Conversation.find( { $or: [ { initiator: userId }, { responder: userId } ] }, function(err, results) {
-    res.end(results);
+    res.send(results);
   });
 };
 
