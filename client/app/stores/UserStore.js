@@ -38,7 +38,7 @@ AppDispatcher.register(function(payload) {
   var action = payload.action;
   var text;
   switch(action.actionType) {
-    case FluxUserConstants.RECEIVE_DATA:
+    case FluxUserConstants.RECEIVE_USER_DATA:
       loadUsersData(action.data);
       break;
 
