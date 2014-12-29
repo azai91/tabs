@@ -5,17 +5,16 @@ var FluxProfileListItem = React.createClass({
 
   selectProf: function() {
     console.log('clickedProf');
+    console.log(this.props.index);
     FluxUserActions.selectUser(this.props.index);
   },
 
   render: function() {
       var prof = this.props.profile;
-      console.log(prof.skills);
-
     return (
       <div className="flux-profile-list-item" onClick={this.selectProf}>
         <div>{prof.firstName} {prof.lastName} </div>
-        <ul>
+        <ul>Skills:
           {
             prof.skills.map(function(skill) {
             return (
@@ -23,8 +22,7 @@ var FluxProfileListItem = React.createClass({
             );
           })}
         </ul>
-
-        <div>{prof.interests}</div>
+        <div>Interests: {prof.interests}</div>
       </div>
     );
   }

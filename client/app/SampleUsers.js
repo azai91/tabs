@@ -16,23 +16,43 @@ var users = [
     lastName: 'W',
     skills: ['cs','dsfa'],
     interests: 'some random stuff'
+  },
+  {
+    firstName: 'Tom',
+    lastName: 'N',
+    skills: ['maasdth','sdfa'],
+    interests: 'some random stuff'
+  },
+  {
+    firstName: 'Joe',
+    lastName: 'Z',
+    skills: ['sciefdfnce','asdf'],
+    interests: 'some random stuff'
+  },
+  {
+    firstName: 'Bri',
+    lastName: 'W',
+    skills: ['csdfdf','dsfa'],
+    interests: 'some random stuff'
+  },
+   {
+    firstName: 'Sam',
+    lastName: 'N',
+    skills: ['maasdth','sdfa'],
+    interests: 'some random stuff'
+  },
+  {
+    firstName: 'Bob',
+    lastName: 'Z',
+    skills: ['sciefdfnce','asdf'],
+    interests: 'some random stuff'
+  },
+  {
+    firstName: 'Emi',
+    lastName: 'W',
+    skills: ['csdfdf','dsfa'],
+    interests: 'some random stuff'
   }
 ];
 
 module.exports = users;
-
-// var userSchema = mongoose.Schema({
-//   email: {
-//     type: String,
-//     required: true
-//   },
-//   password: {
-//     type: String,
-//     required: true
-//   },
-//   firstName: String,
-//   lastName: String,
-//   status: String,
-//   skills: [],
-//   interests: String
-// });

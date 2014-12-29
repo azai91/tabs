@@ -3,7 +3,8 @@ var FluxMessageActions = require('../actions/FluxMessageActions');
 var MessageStore = require('../stores/MessageStore');
 var FluxMessageList = require('./FluxMessageList.react');
 var FluxMessageView = require('./FluxMessageView.react');
-
+var MessageAPI = require('../utils/MessageAPI');
+MessageAPI.getMessageData();
 function getMessagesState() {
 
   return {
@@ -31,6 +32,8 @@ var FluxMessageApp = React.createClass({
 
   // Render child comonents, pass state to props
   render: function() {
+    console.log(this.state.messageList);
+
     var selectedMessageIndex = this.state.selectedMessageIndex;
     var currentMessage = this.state.messageList[selectedMessageIndex];
 
