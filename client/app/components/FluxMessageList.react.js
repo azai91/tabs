@@ -9,7 +9,7 @@ var FluxMessageList = React.createClass({
     console.log(this.props);
     var messages = this.props.messages.map(function(message, index) {
       return (
-        <FluxMessageListItem index={index} message={message}/>
+        <FluxMessageListItem index={index} message={message} key={index} />
       );
     });
 

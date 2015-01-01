@@ -5,11 +5,10 @@ var mongoose = require('mongoose'),
 var messageSchema = new Schema({
   senderId: { type: Schema.Types.ObjectId, ref: 'User' },
   recipientId: { type: Schema.Types.ObjectId, ref: 'User' },
-  message: {
+  body: {
     type: String,
     required: true
-  },
-  conversationId: { type: Schema.Types.ObjectId, ref: 'Conversation' }
+  }
 });
 
 // compile message schema into a message model

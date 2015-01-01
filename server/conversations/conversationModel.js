@@ -3,8 +3,7 @@ var mongoose = require('mongoose'),
 
 // define conversation schema
 var conversationSchema = new Schema({
-  initiatorId: { type: Schema.Types.ObjectId, ref: 'User' },
-  responderId: { type: Schema.Types.ObjectId, ref: 'User' },
+  users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   messages: [{ type: Schema.Types.ObjectId, ref: 'Message' }]
 });
 

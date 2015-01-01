@@ -1,28 +1,20 @@
 var Message = require('./messageModel');
+var userController = require('../users/userController');
+// var Q = require('q');
 
 var messageController = {};
 messageController.saveMessage = saveMessage;
 
-//formatting of what's in req important
-function saveMessage(req, res, next) {
-  var senderId = req.body.senderId,
-      recipientId = req.body.recipientId,
-      message = req.body.message,
-      conversationId = req.body.conversationId;
+function saveMessage(message, callback) {
 
-  Message.create({
-    senderId: senderId,
-    recipientId: recipientId,
-    message: message,
-    conversationId: conversationId
-  }, function(err, newMessage) {
+  // Message needs to contain senderID, recepientID, body, conversationID
+  Message.create(message, function(err, createdMessage) {
     if (err) {
-      throw err;
-    } else {
-      req.body.newMessageId = newMessage._id;
-      next();
+      console.log('error saving Message', err);
     }
+    callback(createdMessage);
   });
+
 };
 
 module.exports = messageController;

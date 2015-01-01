@@ -5,7 +5,8 @@ var request      = require('supertest'),
     passport     = require('passport'),
     session      = require('express-session'),
     mongoose     = require('mongoose'),
-    User         = require('../server/users/userModel');
+    User         = require('../server/users/userModel'),
+    userController = require('../server/users/userController');
 
 mongoose.connect('mongodb://localhost/tabs');
 
@@ -15,6 +16,7 @@ app.use(cookieParser());
 
 app.use(session({
   secret: process.env.SESSION_SECRET || "thisisasecret",
+  key: 'user',
   resave: false,
   saveUninitialized: true
   })
@@ -33,11 +35,21 @@ app.post('/login', passport.authenticate('local-login'), function(req, res) {
   res.send('success login');
 });
 
-User.remove({}, function() {
-  console.log('Database Cleared');
+app.get('/test', userController.isLoggedIn, function(req, res) {
+  console.log('authenticated successfully');
+  res.send('authenticated successfully');
 });
 
+
+var agent;
 describe('Local-Passport Specs', function() {
+
+  before(function(done) {
+    User.remove({}, function() {
+      console.log('User Database Cleared');
+      done();
+    });
+  });
 
   describe('POST signup', function () {
     it('should signup a new user successfully', function(done) {
@@ -55,11 +67,22 @@ describe('Local-Passport Specs', function() {
     });
   });
 
+  before(function(done) {
+    agent = request.agent(app);
+    done();
+  })
+
   describe('POST login', function() {
     it('should login into a current user successfully', function(done) {
-      request(app)
+      agent
         .post('/login')
         .send({ email: 'kirby8u@hotmail.com', password: 'hackreactor'})
+        .expect(200, done);
+    });
+
+    it('should pass through authentication', function(done) {
+      agent
+        .get('/test')
         .expect(200, done);
     });
 
@@ -69,6 +92,8 @@ describe('Local-Passport Specs', function() {
         .send({ email: 'kirby8u@hotmail.com', password: 'wrong'})
         .expect(401, done);
     });
+
+
   });
 
 });

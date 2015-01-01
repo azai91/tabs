@@ -4,18 +4,22 @@ var MessageStore = require('../stores/MessageStore');
 var FluxMessageList = require('./FluxMessageList.react');
 var FluxMessageView = require('./FluxMessageView.react');
 var MessageAPI = require('../utils/MessageAPI');
-MessageAPI.getMessageData();
+
 function getMessagesState() {
 
   return {
-    messageList: MessageStore.getMessageList(),
-    selectedMessageIndex: MessageStore.getSelectedIndex()
+    conversationList: MessageStore.getConversationList(),
+    selectedConversationIndex: MessageStore.getSelectedConversationIndex()
   };
 }
+
+// move later, GET request is async
+MessageAPI.getMessageData();
 
 var FluxMessageApp = React.createClass({
 
   getInitialState: function() {
+    console.log('hi');
     return getMessagesState();
   },
 
@@ -30,17 +34,20 @@ var FluxMessageApp = React.createClass({
     MessageStore.removeChangeListener(this._onChange);
   },
 
+  sendMessage: function(message, index) {
+    MessageAPI.sendMessage(message, index);
+  },
+
   // Render child comonents, pass state to props
   render: function() {
-    console.log(this.state.messageList);
 
-    var selectedMessageIndex = this.state.selectedMessageIndex;
-    var currentMessage = this.state.messageList[selectedMessageIndex];
+    var selectedConversationIndex = this.state.selectedConversationIndex;
+    var currentConversation = this.state.conversationList[selectedConversationIndex];
 
     return (
       <div className="flux-message-app">
-        <FluxMessageList messages={this.state.messageList} />
-        <FluxMessageView currentMessage={currentMessage} index={selectedMessageIndex} />
+        <FluxMessageList messages={this.state.conversationList} />
+        <FluxMessageView currentConversation={currentConversation} index={selectedConversationIndex} sendMessage={this.sendMessage} />
       </div>
     );
   },

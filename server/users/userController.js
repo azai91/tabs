@@ -1,12 +1,14 @@
 var User = require('./userModel');
+var mongoose = require('mongoose');
 
 var userController = {};
 userController.addRemainingDetails = addRemainingDetails;
 userController.isLoggedIn = isLoggedIn;
 userController.logout = logout;
 userController.searchForSkill = searchForSkill;
+userController.addConversationToUsers = addConversationToUsers;
 
-// passport local strategy, local-signup only adds email and password, 
+// passport local strategy, local-signup only adds email and password,
 // so here we add the rest of the details that were submitted
 function addRemainingDetails(req, res) {
 
@@ -55,5 +57,22 @@ function searchForSkill(req, res) {
       res.send(results);
   });
 };
+
+function addConversationToUsers(req, res, next) {
+
+  var senderId = mongoose.Types.ObjectId(req.body.senderId);
+  var recipientId = mongoose.Types.ObjectId(req.body.recipientId);
+  var conversationId = mongoose.Types.ObjectId(req.body.conversationId);
+
+  User.update({ _id : { $in : [senderId, recipientId] } },
+              { $push : { conversations: conversationId } },
+              { multi: true },
+              function(err, updatedUser) {
+                if (err) {
+                  console.log('error add conversation to user', err);
+                }
+                res.sendStatus(200);
+              });
+}
 
 module.exports = userController;

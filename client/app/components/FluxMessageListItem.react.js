@@ -12,7 +12,7 @@ var FluxMessageListItem = React.createClass({
 
     return (
       <div className="flux-message-list-item" onClick={this.selectMessage}>
-      {this.props.message.from}
+      {this.props.message.withName}
       </div>
     )
   }

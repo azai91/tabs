@@ -1,27 +1,39 @@
 var messages = [
   {
     from: 'Jon',
-    conversation: [
+    conversationId: 1,
+    fromId: 23,
+    messages: [
       {
         status: 'received',
-        message: 'hi'
+        body: 'hi',
+        messageID: 1,
+        conversationId: 1,
+        senderId: 3,
+        recepientId: 34,
       },
       {
         status: 'sent',
-        message: 'sup'
+        body: 'sup',
+        messageID: 2,
+        conversationId: 1
       }
     ]
   },
   {
     from: 'Caro',
-    conversation: [
+    messages: [
       {
         status: 'received',
-        message: 'hi2'
+        body: 'hi2',
+        messageID: 3,
+        conversationId: 2
       },
       {
         status: 'sent',
-        message: 'sup2'
+        body: 'sup2',
+        messageID: 4,
+        conversationId: 2
       }
     ]
   }
