@@ -40,7 +40,8 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/');
+  res.send([]);
+  // res.redirect('/');
 };
 
 function logout(req, res) {

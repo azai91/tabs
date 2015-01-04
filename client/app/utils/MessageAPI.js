@@ -3,25 +3,24 @@ var SampleMessages = require('../SampleMessages');
 var $ = require('jquery');
 
 module.exports = {
+
   getMessageData: function() {
-
     $.get('/messages', function(messages) {
-      console.log('messages', messages);
       FluxMessageActions.receiveMessages(messages);
+    }).fail(function(err) {
+      console.log('failed to retrieve conversation', err);
     });
-
-
-    // FluxMessageActions.receiveMessages(SampleMessages);
   },
 
   sendMessage: function(message, index) {
 
-    // some ajax reques that will return a success call
-    //$.post('/message', data)
-
     // Message needs senderID, conversationID, and recipientID
     $.post('/messages', message, function(data) {
-      FluxMessageActions.sendMessage(message, index);
+      console.log('data');
+      console.log(data);
+      FluxMessageActions.sendMessage(data, index);
+    }).fail(function(err) {
+      console.log('message failed to send', err);
     });
   }
 };

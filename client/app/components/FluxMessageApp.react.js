@@ -1,6 +1,6 @@
 var React = require('react');
 var FluxMessageActions = require('../actions/FluxMessageActions');
-var MessageStore = require('../stores/MessageStore');
+var ConversationStore = require('../stores/ConversationStore');
 var FluxMessageList = require('./FluxMessageList.react');
 var FluxMessageView = require('./FluxMessageView.react');
 var MessageAPI = require('../utils/MessageAPI');
@@ -8,13 +8,10 @@ var MessageAPI = require('../utils/MessageAPI');
 function getMessagesState() {
 
   return {
-    conversationList: MessageStore.getConversationList(),
-    selectedConversationIndex: MessageStore.getSelectedConversationIndex()
+    conversationList: ConversationStore.getConversationList(),
+    selectedConversationIndex: ConversationStore.getSelectedConversationIndex()
   };
 }
-
-// move later, GET request is async
-MessageAPI.getMessageData();
 
 var FluxMessageApp = React.createClass({
 
@@ -23,15 +20,20 @@ var FluxMessageApp = React.createClass({
     return getMessagesState();
   },
 
+  componentWillMount: function() {
+    console.log('called');
+    MessageAPI.getMessageData();
+  },
+
   // Add change listeners to stores
   componentDidMount: function() {
-    MessageStore.addChangeListener(this._onChange);
+    ConversationStore.addChangeListener(this._onChange);
   },
 
   // Remove change listeners from stores
   componentWillUnmount: function() {
     console.log('unmount');
-    MessageStore.removeChangeListener(this._onChange);
+    ConversationStore.removeChangeListener(this._onChange);
   },
 
   sendMessage: function(message, index) {
@@ -40,14 +42,13 @@ var FluxMessageApp = React.createClass({
 
   // Render child comonents, pass state to props
   render: function() {
-
+    console.log('rendering');
     var selectedConversationIndex = this.state.selectedConversationIndex;
     var currentConversation = this.state.conversationList[selectedConversationIndex];
-
     return (
       <div className="flux-message-app">
         <FluxMessageList messages={this.state.conversationList} />
-        <FluxMessageView currentConversation={currentConversation} index={selectedConversationIndex} sendMessage={this.sendMessage} />
+        <FluxMessageView currentConversation={currentConversation} sendMessage={this.sendMessage} index={selectedConversationIndex}/>
       </div>
     );
   },

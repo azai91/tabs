@@ -16,12 +16,10 @@ function setSelected(index) {
 }
 
 function addMessageToSelected(data, index) {
-
-  console.log(_conversations[index]);
   _conversations[index].messages.push(data);
 }
 
-var MessageStore = _.extend({}, EventEmitter.prototype, {
+var ConversationStore = _.extend({}, EventEmitter.prototype, {
   getConversationList: function() {
     return _conversations;
   },
@@ -68,10 +66,10 @@ AppDispatcher.register(function(payload) {
   }
 
   // If action was responsed to, emit change event for views to re-render
-  MessageStore.emitChange();
+  ConversationStore.emitChange();
 
   return true;
 
 });
 
-module.exports = MessageStore;
+module.exports = ConversationStore;
