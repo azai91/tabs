@@ -11,9 +11,11 @@ var request                = require('supertest'),
     Conversation = require('../server/conversations/conversationModel'),
     userController = require('../server/users/userController');
 
+var mongoURI = require('../server/config/database');
+
 var expect = require('chai').expect;
 
-mongoose.connect('mongodb://localhost/tabsdb');
+mongoose.connect(mongoURI.URI);
 
 var app = express();
 app.use(bodyParser.json());
@@ -102,7 +104,10 @@ describe('ConversationController Spec', function() {
       agent
         .post('/messages')
         .send({senderId: senderId, recipientId: recipientId, body: 'first post'})
-        .expect(200, done);
+        .end(function(err, res) {
+          console.log(res.body);
+          done();
+        });
     });
 
     it('should add message to already existing conversation', function(done) {
@@ -113,7 +118,10 @@ describe('ConversationController Spec', function() {
         agent
           .post('/messages')
           .send({recipientId: recipientId, body: 'second post', conversationId: conversationId})
-          .expect(200, done);
+          .end(function(err, res) {
+            console.log(res.body);
+            done();
+          });
       });
     });
 

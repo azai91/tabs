@@ -1,6 +1,7 @@
 var React = require('react');
+var FluxMessage = require('./FluxMessage.react');
 
-var FluxMessage = React.createClass({
+var FluxMessageView = React.createClass({
 
   sendMessage: function(e) {
     e.preventDefault();
@@ -13,17 +14,15 @@ var FluxMessage = React.createClass({
       conversationId: this.props.currentConversation.conversationId
     };
 
-    console.log('data', data);
     this.props.sendMessage(data, this.props.index);
     this.refs.message.getDOMNode().value = "";
   },
 
   render: function() {
-    var currentMessage = this.props.currentConversation.messages;
+    var currentMessage = this.props.currentConversation ? this.props.currentConversation.messages : [];
     var conversation = currentMessage.map(function(data, index) {
-
       return (
-        <li className={data.status} key={data.messageID} >{data.body}</li>
+        <FluxMessage className={data.status} key={data.messageId} message={data.body}/>
       );
     });
 
@@ -41,4 +40,4 @@ var FluxMessage = React.createClass({
   }
 });
 
-module.exports = FluxMessage;
+module.exports = FluxMessageView;

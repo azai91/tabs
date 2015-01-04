@@ -11,7 +11,6 @@ var FluxUserActions = {
     });
   },
   selectUser: function(index) {
-    console.log('in here');
     AppDispatcher.handleAction({
       actionType: FluxUserConstants.SELECT_USER,
       data: index

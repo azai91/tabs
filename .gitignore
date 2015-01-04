@@ -1,3 +1,4 @@
 node_modules
 client/lib
 build
+logfile.log

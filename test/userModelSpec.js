@@ -2,9 +2,9 @@ var mongoose = require('mongoose'),
     User = require('../server/users/userModel'),
     expect = require('chai').expect;
 
-mongoose.connect('mongodb://localhost/tabs');
+var mongoURI = require('../server/config/database');
 
-
+mongoose.connect(mongoURI.URI);
 
 describe('User Model Spec', function() {
 

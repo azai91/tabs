@@ -18,6 +18,7 @@ gulp
   .task('watch', watch);
 
 gulp.task('default', ['styles', 'watch', 'browserify']);
+gulp.task('build', ['styles', 'browserify']);
 
 var paths = {
   script: './client/app/app.jsx',
