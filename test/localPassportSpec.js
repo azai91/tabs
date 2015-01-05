@@ -8,7 +8,9 @@ var request      = require('supertest'),
     User         = require('../server/users/userModel'),
     userController = require('../server/users/userController');
 
-mongoose.connect('mongodb://localhost/tabs');
+var mongoURI = require('../server/config/database');
+
+mongoose.connect(mongoURI.URI);
 
 var app = express();
 app.use(bodyParser.json());

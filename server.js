@@ -45,8 +45,7 @@ require('./server/config/passport')(passport);
 app.post('/search', userController.searchForSkill);
 
 // returns conversations array for the user
-// app.get('/messages', userController.isLoggedIn, conversationController.getConversations);
-app.get('/messages', conversationController.getConversations);
+app.get('/messages', userController.isLoggedIn, conversationController.getConversations);
 
 
 // adds incoming message to database if user is logged in
@@ -69,7 +68,7 @@ app.post('/login', passport.authenticate('local-login', {
 // logs user out using passports .logout() functionality
 app.get('/logout', userController.logout);
 
-var port = 8000;
+var port = process.env.PORT || 80;
 
 app.listen(port);
 

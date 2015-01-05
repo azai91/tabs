@@ -30,7 +30,7 @@ function saveToConversation(req, res) {
 
       // If conversation is found
       if (foundConversation) {
-        res.send(newMessage);
+        res.send(parseMessage(newMessage, req.user._id, conversationId));
       }
 
       // did not find conversation, makes a conversation
@@ -82,14 +82,14 @@ function parseConversation(conversation, userId) {
   clientConversation.conversationId = conversation.id;
 
   clientConversation.messages = conversation.messages.map(function(message, index) {
-    return parseMessages(message, userId, conversation.id);
+    return parseMessage(message, userId, conversation.id);
   });
 
   return clientConversation;
 }
 
 // Converts mongoose messages to client readable version
-function parseMessages(message, userId, conversationId) {
+function parseMessage(message, userId, conversationId) {
   var userId = mongoose.Types.ObjectId(userId);
   var clientMessage = {};
 
