@@ -1,4 +1,4 @@
-/* line 13, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+/* line 13, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
@@ -9,51 +9,51 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   border-sizing: border-box; }
 
 /* HTML5 display-role reset for older browsers */
-/* line 24, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+/* line 24, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
   display: block; }
 
-/* line 27, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+/* line 27, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
 body {
   line-height: 1; }
 
-/* line 30, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+/* line 30, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
 ol, ul {
   list-style: none; }
 
-/* line 33, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+/* line 33, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
 blockquote, q {
   quotes: none; }
 
-/* line 37, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+/* line 37, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
 blockquote:before, blockquote:after, q:before, q:after {
   content: '';
   content: none; }
 
-/* line 41, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+/* line 41, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-/* line 46, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+/* line 46, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
 html, body {
   height: 100%; }
 
-/* line 51, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+/* line 51, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
 .flux-home-app {
   height: 100%; }
 
-/* line 55, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+/* line 55, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
 .flux-profile-list-item {
   float: left;
   border: black 1px solid;
   margin: 10px; }
 
-/* line 69, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+/* line 69, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
 .flux-message-app {
   height: 100%; }
 
-/* line 73, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+/* line 73, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
 .flux-message-list {
   position: absolute;
   top: 0;
@@ -63,7 +63,7 @@ html, body {
   border: black 1px solid;
   display: inline-block; }
 
-/* line 83, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+/* line 83, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
 .flux-message-view {
   position: absolute;
   left: 300px;
@@ -71,36 +71,36 @@ html, body {
   border: black 1px solid;
   height: 100%;
   display: inline-block; }
-  /* line 91, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+  /* line 91, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
   .flux-message-view li {
     padding: 10px; }
-  /* line 95, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+  /* line 95, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
   .flux-message-view .received {
     text-align: left; }
-  /* line 99, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+  /* line 99, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
   .flux-message-view .sent {
     text-align: right; }
 
-/* line 104, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+/* line 104, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
 .flux-message-input {
   position: absolute;
   width: 100%;
   bottom: 0;
   height: 20px; }
-  /* line 111, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+  /* line 111, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
   .flux-message-input input[type="text"] {
     width: calc(100% - 116px);
     height: 100%; }
-  /* line 116, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+  /* line 116, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
   .flux-message-input input[type="submit"] {
     width: 110px;
     height: 100%; }
 
-/* line 122, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+/* line 122, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
 .flux-message-list-item {
   height: 70px;
   border: black 1px solid; }
-  /* line 126, /Users/Zai/Desktop/HackReactor/tabs/client/styles/style.scss */
+  /* line 126, /Users/carolinewong/Desktop/tabs/client/styles/style.scss */
   .flux-message-list-item:hover {
     background-color: #ff6b52; }
 
