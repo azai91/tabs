@@ -1,5 +1,4 @@
 node_modules
 client/lib
 build
-server/config/database.js
 logfile.log

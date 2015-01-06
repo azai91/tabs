@@ -1,0 +1,1 @@
+module.exports = { 'URI' : 'mongodb://azai91:$hackreactor&@ds045107.mongolab.com:45107/Tabs_MongoDB' };

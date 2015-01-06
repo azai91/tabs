@@ -68,7 +68,7 @@ app.post('/login', passport.authenticate('local-login', {
 // logs user out using passports .logout() functionality
 app.get('/logout', userController.logout);
 
-var port = process.env.PORT || 80;
+var port = process.env.PORT || 3000;
 
 app.listen(port);
 
