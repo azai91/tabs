@@ -8,6 +8,7 @@ var _users = [],
     _selectedUserIndex = 0;
 
 function loadUsersData(data) {
+  console.log('in loadUsersData',data);
   _users = data;
 };
 
@@ -45,10 +46,6 @@ AppDispatcher.register(function(payload) {
     case FluxUserConstants.SELECT_USER:
       setSelected(action.data);
       break;
-
-    // case FluxMessageConstants.ADD_MESSAGE:
-    //   addMessageToSelected(action.message, action.index);
-    //   break;
 
     default:
       return true;

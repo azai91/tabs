@@ -1,10 +1,10 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var FluxUserConstants = require('../constants/FluxUserConstants');
-
 var FluxUserActions = {
 
   // Receive users from API
   receiveUsers: function(data) {
+    console.log('DD',data);
     AppDispatcher.handleAction({
       actionType: FluxUserConstants.RECEIVE_USER_DATA,
       data: data

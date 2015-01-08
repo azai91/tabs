@@ -2,6 +2,7 @@ var React = require('react');
 var FluxUserActions = require('../actions/FluxUserActions');
 var UserStore = require('../stores/UserStore');
 var FluxProfileList = require('./FluxProfileList.react');
+var UserAPI = require('../utils/UserAPI');
 
 //need to implement in UserStore
 function getProfilesState() {
@@ -15,8 +16,11 @@ var FluxHomeApp = React.createClass({
   getInitialState: function() {
     return getProfilesState();
   },
+  componentWillMount: function() {
+    UserAPI.getUserData();
+  },
   componentDidMount: function() {
-    UserStore.addChangeListener(this._onChange);
+    UserStore.addChangeListener(this._onChange);    
   },
   componentWillUnmount: function() {
     UserStore.removeChangeListener(this._onChange);

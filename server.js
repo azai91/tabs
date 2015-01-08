@@ -58,6 +58,8 @@ app.post('/signup', passport.authenticate('local-signup'), function(req, res) {
   res.send('signup successful');
 });
 
+//returns users array to the user
+app.get('/users', userController.isLoggedIn, userController.getUsers);
 
 // uses passport local-login strategy to authenticate on login
 app.post('/login', passport.authenticate('local-login', {
@@ -65,6 +67,7 @@ app.post('/login', passport.authenticate('local-login', {
   failureRedirect: '/login'
 }));
 
+app.post('')
 // logs user out using passports .logout() functionality
 app.get('/logout', userController.logout);
 

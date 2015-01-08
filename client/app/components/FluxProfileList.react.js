@@ -7,7 +7,7 @@ var FluxProfileList = React.createClass({
     var _this = this;
     var profiles = this.props.profList.map(function(profile, index) {
       return (
-        <FluxProfileListItem key={profile.id} index={index} profile={profile} />
+        <FluxProfileListItem key={profile._id} index={index} profile={profile} />
       );
     });
     return (

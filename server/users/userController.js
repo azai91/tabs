@@ -2,6 +2,7 @@ var User = require('./userModel');
 var mongoose = require('mongoose');
 
 var userController = {};
+userController.getUsers = getUsers;
 userController.addRemainingDetails = addRemainingDetails;
 userController.isLoggedIn = isLoggedIn;
 userController.logout = logout;
@@ -59,6 +60,21 @@ function searchForSkill(req, res) {
   });
 };
 
+function getUsers(req, res) {
+  console.log('getUsers');
+  var userId = mongoose.Types.ObjectId(req.user._id);
+  User.find({})
+  .populate('users')
+  .exec(function(err, foundUsers) {
+    if (err) {
+      console.log('cannot get users', err);
+    }
+    var users = foundUsers.map(function(user) {
+      return user;
+    });
+    res.send(users);
+  });
+};
 function addConversationToUsers(req, res, next) {
 
   var senderId = mongoose.Types.ObjectId(req.body.senderId);
