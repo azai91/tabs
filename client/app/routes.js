@@ -11,7 +11,7 @@ var React = require('react');
 var FluxMessageApp = require('./components/FluxMessageApp.react');
 var FluxHomeApp = require('./components/FluxHomeApp.react');
 var FluxLogin = require('./components/FluxLogin.react');
-var FluxSignupGuide = require('./components/FluxSignupGuide.react');
+var FluxSignup = require('./components/FluxSignup.react');
 
 var Home = React.createClass({
   render: function() {
@@ -36,7 +36,7 @@ var routes = (
   <Route name="app" path="/" handler={Home}>
     <Route name="messages" handler={FluxMessageApp}/>
     <Route name="login" handler={FluxLogin}/>
-    <Route name="signup" handler={FluxSignupGuide}/>
+    <Route name="signup" handler={FluxSignup}/>
     <DefaultRoute handler={FluxHomeApp}/>
   </Route>
 );

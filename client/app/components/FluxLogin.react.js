@@ -1,23 +1,48 @@
 var React = require('react');
+var AuthAPI = require('../utils/AuthAPI');
     // FluxLoginActions = require('../actions/FluxLoginActions');
 
 var FluxLogin = React.createClass({
+  getInitialState: function() {
+    return {
+      value: 'Hello!',
+      email: '',
+      password: '',
+    };
+  },
+  handleChange: function (key) {
+    return function (e) {
+      var state = {};
+      state[key] = e.target.value;
+      console.log(state);
+      this.setState(state);
+    }.bind(this);
+  },
+  handleLoginSubmit: function() {
+    var loginObject = {
+      email: this.state.email,
+      password: this.state.password
+    };
+
+    console.log(loginObject);
+
+    AuthAPI.handleLoginSubmit(loginObject);
+
+  },
   render: function() {
+    var email = this.state.email,
+        password = this.state.password;
+
     return (
       <div>
-        <h1>Login</h1>
-        <form action="/login" method="post">
+        <form>
           <div>
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email" />
+            <input type="text" value={email} placeholder="Email" required onChange={this.handleChange("email")}/>
           </div>
           <div>
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" />
+            <input type="text" value={password} placeholder="Password" onChange={this.handleChange("password")}/>
           </div>
-          <label for="loginbutton">
-            <input value="Log In" type="submit" id="loginbutton" />
-          </label>
+          <button type="button" onClick={this.handleLoginSubmit}>Login</button>
         </form>
       </div>
     );
