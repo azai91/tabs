@@ -17,11 +17,12 @@ gulp
   .task('styles', styles)
   .task('watch', watch);
 
-gulp.task('default', ['styles', 'watch', 'browserify', 'serve']);
-gulp.task('build', ['styles', 'browserify', 'serve']);
+gulp.task('default', ['styles', 'browserify', 'watch','serve']);
+gulp.task('build', ['styles', 'browserify']);
 
 var paths = {
   script: './client/app/app.jsx',
+  scripts: ['./client/app/app.jsx','./client/app/**/*.js'],
   styles: './client/styles/*.scss',
   dest: './build'
 };
@@ -36,26 +37,14 @@ function scripts() {
     fullPaths: true
   });
 
-  var watcher = watchify(bundler);
-
-  return watcher
-  .on('update', function() {
-    var updateStart = Date.now();
-    console.log('Updating scripts');
-    watcher.bundle()
-    .pipe(source('bundle.js'))
-
-    //add uglify here
-    .pipe(plumber())
-    .pipe(gulp.dest('./build/'))
-    .pipe(livereload());
-
-    console.log('Updated scripts!', (Date.now() - updateStart)  +'ms');
-  })
-  .bundle()
-  .pipe(source('bundle.js'))
-  .pipe(gulp.dest(paths.dest));
-}
+  bundler.bundle()
+   .on('error', function(err) {
+    console.log('Error with Browserify', err);
+   })
+   .pipe(source('bundle.js'))
+   .pipe(gulp.dest('./build'))
+   .pipe(livereload());
+};
 
 function serve() {
   nodemon({script: 'server.js'});
@@ -78,11 +67,12 @@ function styles() {
             browsers: ['last 2 versions'],
             cascade: false
         }))
-        .pipe(livereload())
-        .pipe(gulp.dest(paths.dest));
+        .pipe(gulp.dest(paths.dest))
+        .pipe(livereload());
 }
 
 function watch() {
   livereload.listen();
   gulp.watch(paths.styles, styles);
+  gulp.watch(paths.scripts, scripts);
 }
