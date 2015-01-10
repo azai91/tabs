@@ -53,19 +53,18 @@ app.post('/messages', userController.isLoggedIn, conversationController.saveToCo
 
 
 // signs up new user and adds all details
-// app.post('/signup', passport.authenticate('local-signup'), userController.addRemainingDetails);
-app.post('/signup', passport.authenticate('local-signup'), function(req, res) {
-  res.send('signup successful');
-});
+app.post('/signup', passport.authenticate('local-signup'), userController.addRemainingDetails);
+// app.post('/signup', passport.authenticate('local-signup'), function(req, res) {
+//   res.send('signup successful');
+// });
 
 //returns users array to the user
 app.get('/users', userController.isLoggedIn, userController.getUsers);
 
 // uses passport local-login strategy to authenticate on login
-app.post('/login', passport.authenticate('local-login', {
-  successRedirect: '/',
-  failureRedirect: '/login'
-}));
+app.post('/login', passport.authenticate('local-login'), function(req, res) {
+  res.send('login successful');
+});
 
 app.post('')
 // logs user out using passports .logout() functionality

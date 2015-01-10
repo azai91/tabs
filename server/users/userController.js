@@ -12,6 +12,7 @@ userController.addConversationToUsers = addConversationToUsers;
 // passport local strategy, local-signup only adds email and password,
 // so here we add the rest of the details that were submitted
 function addRemainingDetails(req, res) {
+  console.log(req.body);
 
   var email = req.body.email,
       firstName = req.body.firstName,
@@ -33,7 +34,8 @@ function addRemainingDetails(req, res) {
     console.log(raw); // curious what the raw response from mongo is
   });
 
-  res.redirect('/');
+  res.send('signup successful');
+  // res.redirect('/');
 };
 
 // middleware that checks if user is logged in
