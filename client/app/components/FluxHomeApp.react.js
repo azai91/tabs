@@ -20,7 +20,7 @@ var FluxHomeApp = React.createClass({
     UserAPI.getUserData();
   },
   componentDidMount: function() {
-    UserStore.addChangeListener(this._onChange);    
+    UserStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function() {
     UserStore.removeChangeListener(this._onChange);
@@ -38,6 +38,5 @@ var FluxHomeApp = React.createClass({
     this.setState(getProfilesState());
   }
 });
-
 
 module.exports = FluxHomeApp;
