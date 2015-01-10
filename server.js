@@ -70,7 +70,7 @@ app.post('')
 // logs user out using passports .logout() functionality
 app.get('/logout', userController.logout);
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 80;
 
 app.listen(port);
 
