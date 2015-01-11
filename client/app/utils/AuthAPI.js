@@ -3,15 +3,14 @@ var $ = require('jquery');
 
 module.exports = {
 
-  handleSignupSubmit: function(signupObject) {
+  handleSignupSubmit: function(signupObject, cb) {
     console.log(signupObject);
-    console.log(JSON.stringify(signupObject));
     $.ajax({
       url: '/signup',
       type: 'POST',
       data: signupObject,
       success: function(data) {
-        console.log(data);
+        cb('app');
       },
       error: function(xhr, status, err) {
         console.error(xhr, status, err, err.toString());
@@ -19,15 +18,14 @@ module.exports = {
     });
   },
 
-  handleLoginSubmit: function(loginObject) {
+  handleLoginSubmit: function(loginObject, cb) {
     console.log(loginObject);
-    console.log(JSON.stringify(loginObject));
     $.ajax({
       url: '/login',
       type: 'POST',
       data: loginObject,
       success: function(data) {
-        console.log(data);
+        cb('app');
       },
       error: function(xhr, status, err) {
         console.error(xhr, status, err, err.toString());

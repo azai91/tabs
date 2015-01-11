@@ -1,8 +1,12 @@
 var React = require('react');
 var AuthAPI = require('../utils/AuthAPI');
     // FluxLoginActions = require('../actions/FluxLoginActions');
+var Router = require('react-router');
+var Navigation = Router.Navigation;
 
 var FluxLogin = React.createClass({
+  mixins: [Navigation],
+
   getInitialState: function() {
     return {
       value: 'Hello!',
@@ -25,8 +29,7 @@ var FluxLogin = React.createClass({
     };
 
     console.log(loginObject);
-
-    AuthAPI.handleLoginSubmit(loginObject);
+    AuthAPI.handleLoginSubmit(loginObject, this.transitionTo);
 
   },
   render: function() {

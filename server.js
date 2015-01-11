@@ -63,14 +63,15 @@ app.get('/users', userController.isLoggedIn, userController.getUsers);
 
 // uses passport local-login strategy to authenticate on login
 app.post('/login', passport.authenticate('local-login'), function(req, res) {
-  res.send('login successful');
+  res.sendStatus(200,'created session');
+  // res.send('login successful');
 });
 
 app.post('')
 // logs user out using passports .logout() functionality
 app.get('/logout', userController.logout);
 
-var port = process.env.PORT || 80;
+var port = process.env.PORT || 3000;
 
 app.listen(port);
 

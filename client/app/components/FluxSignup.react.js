@@ -1,8 +1,12 @@
 var React = require('react');
 var AuthAPI = require('../utils/AuthAPI');
     // FluxSignupActions = require('../actions/FluxSignupActions');
+var Router = require('react-router');
+var Navigation = Router.Navigation;
 
 var FluxSignup = React.createClass({
+  mixins: [Navigation],
+
   getInitialState: function() {
     return {
       firstName: '',
@@ -51,7 +55,7 @@ var FluxSignup = React.createClass({
 
     console.log(signupObject);
 
-    AuthAPI.handleSignupSubmit(signupObject);
+    AuthAPI.handleSignupSubmit(signupObject, this.transitionTo);
 
   },
   render: function() {
