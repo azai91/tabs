@@ -4,6 +4,7 @@ var NotFoundRoute = Router.NotFoundRoute;
 var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var RouteHandler = Router.RouteHandler;
+var AuthAPI = require('./utils/AuthAPI');
 
 var React = require('react');
 
@@ -12,8 +13,16 @@ var FluxMessageApp = require('./components/FluxMessageApp.react');
 var FluxHomeApp = require('./components/FluxHomeApp.react');
 var FluxLogin = require('./components/FluxLogin.react');
 var FluxSignup = require('./components/FluxSignup.react');
+var Navigation = require('react-router').Navigation;
 
 var Home = React.createClass({
+  mixins: [Navigation],
+
+  logout: function() {
+    // this.transitionTo('messages');
+    AuthAPI.logout.call(this);
+  },
+
   render: function() {
     return (
       <div>
@@ -22,6 +31,7 @@ var Home = React.createClass({
             <li><Link to="messages">Messages</Link></li>
             <li><Link to="login">Login</Link></li>
             <li><Link to="signup">Signup</Link></li>
+            <li onClick={this.logout}>Logout</li>
           </ul>
         </header>
         <RouteHandler/>

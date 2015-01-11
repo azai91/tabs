@@ -52,6 +52,5 @@ plan.remote(function(remote) {
 
   remote.log('Reload application');
   remote.sudo('ln -snf ~/' + tmpDir + ' ~/'+appName, {user: username});
-  remote.exec('sudo forever start ~/'+appName + '/' + startFile);
   remote.exec('sudo restart tabs');
 });

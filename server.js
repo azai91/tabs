@@ -67,7 +67,6 @@ app.post('/login', passport.authenticate('local-login'), function(req, res) {
   // res.send('login successful');
 });
 
-app.post('')
 // logs user out using passports .logout() functionality
 app.get('/logout', userController.logout);
 
