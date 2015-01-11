@@ -48,7 +48,8 @@ function isLoggedIn(req, res, next) {
 
 function logout(req, res) {
   req.logout();
-  res.redirect('/');
+  // res.send(200);
+  res.redirect('/#/');
 }
 
 // sends back all users in an array without password, who have that skill

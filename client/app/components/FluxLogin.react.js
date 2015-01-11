@@ -29,7 +29,7 @@ var FluxLogin = React.createClass({
     };
 
     console.log(loginObject);
-    AuthAPI.handleLoginSubmit(loginObject, this.transitionTo);
+    AuthAPI.handleLoginSubmit.call(this, loginObject);
 
   },
   render: function() {
