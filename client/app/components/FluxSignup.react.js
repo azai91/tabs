@@ -82,7 +82,7 @@ var FluxSignup = React.createClass({
             <input type="text" value={email} placeholder="Email" required onChange={this.handleChange("email")}/>
           </div>
           <div>
-            <input type="text" value={password} placeholder="Password" onChange={this.handleChange("password")}/>
+            <input type="password" value={password} placeholder="Password" onChange={this.handleChange("password")}/>
           </div>
 
           <input type="checkbox" name="vehicle" checked={student} onChange={this.changeSelection("student")} /> Student
