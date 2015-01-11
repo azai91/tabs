@@ -34,8 +34,7 @@ function addRemainingDetails(req, res) {
     console.log(raw); // curious what the raw response from mongo is
   });
 
-  res.send('signup successful');
-  // res.redirect('/');
+  res.sendStatus(200,'created session');
 };
 
 // middleware that checks if user is logged in
