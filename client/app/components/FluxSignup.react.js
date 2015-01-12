@@ -15,7 +15,6 @@ var FluxSignup = React.createClass({
       password: '',
       skills: '',
       interests: '',
-      status: '',
       student: false,
       guide: false
     };
@@ -37,12 +36,10 @@ var FluxSignup = React.createClass({
     }.bind(this);
   },
   handleSignupSubmit: function() {
-    if (this.state.guide === true) {
-      this.setState({status: "guide"})
-      console.log(123, this.state.status);
-    } else if (this.state.student === true) {
-      this.setState({status: "student"})
-    }
+    console.log('IMWORKING');
+    console.log('student', this.state.student);
+    console.log('guide', this.state.guide);
+
     var signupObject = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -50,12 +47,13 @@ var FluxSignup = React.createClass({
       password: this.state.password,
       skills: this.state.skills,
       interests: this.state.interests,
-      status: this.state.status
+      student: this.state.student,
+      guide: this.state.guide
     };
 
-    console.log(signupObject);
-
-    AuthAPI.handleSignupSubmit(signupObject, this.transitionTo);
+    console.log('HELLO', signupObject);
+    console.log(1241251,this)
+    AuthAPI.handleSignupSubmit.call(this, signupObject);
 
   },
   render: function() {
@@ -65,8 +63,7 @@ var FluxSignup = React.createClass({
         password = this.state.password,
         skills = this.state.skills,
         interests = this.state.interests,
-        status = this.state.status;
-        student = this.state.student;
+        student = this.state.student,
         guide = this.state.guide;
 
     return (
@@ -85,8 +82,8 @@ var FluxSignup = React.createClass({
             <input type="password" value={password} placeholder="Password" onChange={this.handleChange("password")}/>
           </div>
 
-          <input type="checkbox" name="vehicle" checked={student} onChange={this.changeSelection("student")} /> Student
-          <input type="checkbox" name="vehicle" checked={guide} onChange={this.changeSelection("guide")} /> Guide
+          <input type="checkbox" checked={student} onChange={this.changeSelection("student")} /> Student
+          <input type="checkbox" checked={guide} onChange={this.changeSelection("guide")} /> Guide
 
           { this.state.guide ? 
             <div>
