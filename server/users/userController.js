@@ -57,10 +57,8 @@ function logout(req, res) {
 // sends back all users in an array without password, who have that skill
 function searchForSkill(req, res) {
   var skill = req.body.skill;
-  UserGroup.find({ skills: { $elemMatch: skill} })
-    .populate('email firstName lastName status skills interests')
-    .exec(function(error, results) {
-      res.send(results);
+  User.find({ skills: skill }, function(err, users){
+    res.send(users);
   });
 };
 
