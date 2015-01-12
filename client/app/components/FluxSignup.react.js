@@ -45,7 +45,7 @@ var FluxSignup = React.createClass({
       lastName: this.state.lastName,
       email: this.state.email,
       password: this.state.password,
-      skills: this.state.skills,
+      skills: [this.state.skills],
       interests: this.state.interests,
       student: this.state.student,
       guide: this.state.guide

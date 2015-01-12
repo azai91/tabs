@@ -51,7 +51,6 @@ app.get('/messages', userController.isLoggedIn, conversationController.getConver
 // adds incoming message to database if user is logged in
 app.post('/messages', userController.isLoggedIn, conversationController.saveToConversation);
 
-
 // signs up new user and adds all details
 app.post('/signup', passport.authenticate('local-signup'), userController.addRemainingDetails);
 // app.post('/signup', passport.authenticate('local-signup'), function(req, res) {
