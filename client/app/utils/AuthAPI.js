@@ -4,13 +4,13 @@ var $ = require('jquery');
 module.exports = {
 
   handleSignupSubmit: function(signupObject) {
-    console.log(signupObject);
     var _this = this;
     $.ajax({
       url: '/signup',
       type: 'POST',
       data: signupObject,
       success: function(data) {
+        console.log('success');
         _this.transitionTo('app');
       },
       error: function(xhr, status, err) {
@@ -20,7 +20,6 @@ module.exports = {
   },
 
   handleLoginSubmit: function(loginObject) {
-    console.log(loginObject);
     var _this = this;
     $.ajax({
       url: '/login',

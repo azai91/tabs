@@ -17,7 +17,8 @@ function addRemainingDetails(req, res) {
   var email = req.body.email,
       firstName = req.body.firstName,
       lastName = req.body.lastName,
-      status = req.body.status,
+      student = req.body.student,
+      guide = req.body.guide,
       offerings = req.body.offerings,
       skills = req.body.skills,
       interests = req.body.interests;
@@ -25,7 +26,8 @@ function addRemainingDetails(req, res) {
   User.update({email: email}, {
     firstName: firstName,
     lastName: lastName,
-    status: status,
+    student: student,
+    guide: guide,
     offerings: offerings,
     skills: skills,
     interests: interests

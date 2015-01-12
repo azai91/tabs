@@ -14,8 +14,9 @@ var userSchema = new Schema({
   },
   firstName: String,
   lastName: String,
-  status: String,
   skills: [],
+  student: Boolean,
+  guide: Boolean,
   interests: String,
   conversations: [{ type: Schema.Types.ObjectId, ref: 'Conversation' }]
 });
