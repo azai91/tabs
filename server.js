@@ -69,6 +69,26 @@ app.post('/login', passport.authenticate('local-login'), function(req, res) {
 // logs user out using passports .logout() functionality
 app.get('/logout', userController.logout);
 
+app.get('/auth/github',
+  passport.authenticate('github', { scope: [ 'user:email' ] }));
+
+// handle the callback after github has authenticated the user
+app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
+
+// app.get('/auth/github/callback', function(req, res, next) {
+//   passport.authenticate('github', function(err, user, info) {
+//     if (err) { return next(err); }
+//     if (!user) { console.log('no user found'); } //redirect to login
+//     req.logIn(user, function(err) {
+//       if (err) { return next(err); }
+//       console.log('logged in successfully'); //redirect to homepage
+//     });
+//   })(req, res, next);
+// });
+
 var port = process.env.PORT || 3000;
 
 app.listen(port);
