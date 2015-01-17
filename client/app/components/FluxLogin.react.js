@@ -38,6 +38,7 @@ var FluxLogin = React.createClass({
 
     return (
       <div>
+        <a href="/auth/github">Login with Github</a>
         <form>
           <div>
             <input type="text" value={email} placeholder="Email" required onChange={this.handleChange("email")}/>
