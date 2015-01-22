@@ -801,3 +801,9 @@
 [0mGET /users [32m200 [0m4.114 ms - 2[0m
 [0mGET /messages [32m200 [0m1.246 ms - 2[0m
 [0mGET /favicon.ico [33m404 [0m2.652 ms - 24[0m
+[0mGET /loggedIn [33m404 [0m10.717 ms - 21[0m
+[0mGET /users [36m304 [0m3.604 ms - -[0m
+[0mGET /messages [36m304 [0m1.180 ms - -[0m
+[0mGET /loggedIn [33m404 [0m1.893 ms - 21[0m
+[0mGET /users [36m304 [0m0.810 ms - -[0m
+[0mGET /messages [36m304 [0m0.580 ms - -[0m
