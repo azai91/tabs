@@ -18,7 +18,6 @@ var FluxLogin = React.createClass({
     return function (e) {
       var state = {};
       state[key] = e.target.value;
-      console.log(state);
       this.setState(state);
     }.bind(this);
   },
@@ -28,7 +27,6 @@ var FluxLogin = React.createClass({
       password: this.state.password
     };
 
-    console.log(loginObject);
     AuthAPI.handleLoginSubmit.call(this, loginObject);
 
   },

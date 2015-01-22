@@ -8,7 +8,6 @@ var _users = [],
     _selectedUserIndex = 0;
 
 function loadUsersData(data) {
-  console.log('in loadUsersData',data);
   _users = data;
 };
 

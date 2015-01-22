@@ -4,7 +4,6 @@ var FluxMessageActions = require('../actions/FluxMessageActions');
 var FluxMessageListItem = React.createClass({
 
   selectMessage: function() {
-    console.log('clicked');
     FluxMessageActions.selectMessage(this.props.index);
   },
 
