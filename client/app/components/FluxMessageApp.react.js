@@ -16,12 +16,10 @@ function getMessagesState() {
 var FluxMessageApp = React.createClass({
 
   getInitialState: function() {
-    console.log('hi');
     return getMessagesState();
   },
 
   componentWillMount: function() {
-    console.log('called');
     MessageAPI.getMessageData();
   },
 
@@ -32,7 +30,6 @@ var FluxMessageApp = React.createClass({
 
   // Remove change listeners from stores
   componentWillUnmount: function() {
-    console.log('unmount');
     ConversationStore.removeChangeListener(this._onChange);
   },
 
@@ -42,7 +39,6 @@ var FluxMessageApp = React.createClass({
 
   // Render child comonents, pass state to props
   render: function() {
-    console.log('rendering');
     var selectedConversationIndex = this.state.selectedConversationIndex;
     var currentConversation = this.state.conversationList[selectedConversationIndex];
     return (

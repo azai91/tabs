@@ -23,7 +23,6 @@ var FluxSignup = React.createClass({
     return function (e) {
       var state = {};
       state[key] = e.target.value;
-      console.log(state);
       this.setState(state);
     }.bind(this);
   },
@@ -36,9 +35,6 @@ var FluxSignup = React.createClass({
     }.bind(this);
   },
   handleSignupSubmit: function() {
-    console.log('IMWORKING');
-    console.log('student', this.state.student);
-    console.log('guide', this.state.guide);
 
     var signupObject = {
       firstName: this.state.firstName,
@@ -51,8 +47,6 @@ var FluxSignup = React.createClass({
       guide: this.state.guide
     };
 
-    console.log('HELLO', signupObject);
-    console.log(1241251,this)
     AuthAPI.handleSignupSubmit.call(this, signupObject);
 
   },
@@ -85,10 +79,10 @@ var FluxSignup = React.createClass({
           <input type="checkbox" checked={student} onChange={this.changeSelection("student")} /> Student
           <input type="checkbox" checked={guide} onChange={this.changeSelection("guide")} /> Guide
 
-          { this.state.guide ? 
+          { this.state.guide ?
             <div>
             <div><input type="text" value={skills} placeholder="Skills" onChange={this.handleChange("skills")}/></div>
-            <div><input type="text" value={interests} placeholder="Interests" onChange={this.handleChange("interests")}/></div> 
+            <div><input type="text" value={interests} placeholder="Interests" onChange={this.handleChange("interests")}/></div>
             </div>
           : null }
           <div>

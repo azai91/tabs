@@ -12,7 +12,6 @@ var FluxSearchBar = React.createClass({
       skill: this.state.skill
     };
 
-    console.log(skillObject);
     UserAPI.getSkilledUserData(skillObject);
 
   },
