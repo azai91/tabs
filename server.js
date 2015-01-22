@@ -1,5 +1,4 @@
 var express                = require('express'),
-    path                   = require('path'),
     fs                     = require('fs'),
     morgan                 = require('morgan');
     mongoose               = require('mongoose'),
@@ -16,7 +15,7 @@ var app = express();
 
 mongoose.connect(mongoURI.URI);
 
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(__dirname));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
