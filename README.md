@@ -1,7 +1,5 @@
-#Tabs
+#Overview
+Tabs is web application written in Flux/React to connect developers with other developers.
 
-#Summary
-Tabs is a directory for students to share their skills with other students
-
-#Mission
+#In Progress
 
