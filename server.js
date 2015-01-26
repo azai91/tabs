@@ -46,24 +46,11 @@ app.post('/search', userController.searchForSkill);
 // returns conversations array for the user
 app.get('/messages', userController.isLoggedIn, conversationController.getConversations);
 
-
 // adds incoming message to database if user is logged in
 app.post('/messages', userController.isLoggedIn, conversationController.saveToConversation);
 
-// signs up new user and adds all details
-app.post('/signup', passport.authenticate('local-signup'), userController.addRemainingDetails);
-// app.post('/signup', passport.authenticate('local-signup'), function(req, res) {
-//   res.send('signup successful');
-// });
-
 //returns users array to the user
 app.get('/users', userController.isLoggedIn, userController.getUsers);
-
-// uses passport local-login strategy to authenticate on login
-app.post('/login', passport.authenticate('local-login'), function(req, res) {
-  res.sendStatus(200,'created session');
-  // res.send('login successful');
-});
 
 // logs user out using passports .logout() functionality
 app.get('/logout', userController.logout);
@@ -75,6 +62,7 @@ app.get('/auth/github',
 app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
+    console.log('successssss');
   });
 
 // app.get('/auth/github/callback', function(req, res, next) {

@@ -8,12 +8,13 @@ var userSchema = new Schema({
     type: String,
     required: true
   },
-  password: {
-    type: String,
-    required: true
-  },
+  // password: {
+  //   type: String,
+  //   required: true
+  // },
   firstName: String,
   lastName: String,
+  githubId: Number,
   skills: [],
   student: Boolean,
   guide: Boolean,

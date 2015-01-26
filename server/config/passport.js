@@ -1,7 +1,7 @@
-var LocalStrategy = require('passport-local').Strategy,
-    GithubStrategy = require('passport-github2').Strategy,
-    User          = require('../users/userModel'),
-    configAuth = require('./auth');
+var LocalStrategy   = require('passport-local').Strategy,
+    GithubStrategy  = require('passport-github2').Strategy,
+    User            = require('../users/userModel'),
+    configAuth      = require('./auth');
 
 module.exports = function(passport) {
 
@@ -17,98 +17,40 @@ module.exports = function(passport) {
     });
   });
 
-  passport.use('local-signup', new LocalStrategy({
-      usernameField: 'email',
-      passwordField: 'password'
-    },
-    function(email, password, done) {
-      User.findOne({email: email}, function(err, user) {
-        if (err) {
-          return done(err);
-        }
-
-        //if email already in database then send message back
-        if (user) {
-          return done(null, false, { message: 'Email Already Used'});
-        }
-
-        // if email is not used then proocess to next
-        if (!user) {
-          User.create({email: email, password: password}, function(err, createdUser) {
-
-            return done(null, createdUser);
-          });
-        }
-      });
-    }
-  ));
-
-  passport.use('local-login', new LocalStrategy({
-      usernameField: 'email',
-      passwordField: 'password'
-    },
-    function(email, password, done) {
-      User.findOne({email: email}, function(err, user) {
-        if (err) {
-          return done(err);
-        }
-        if (user) {
-
-          //checks if password is correct
-          if (user.verifyPassword(password)) {
-            return done(null, user);
-          }
-          if (!user.verifyPassword(password)) {
-            return done(null, false, { message: 'incorrect password'});
-          }
-        }
-
-        //cannot find user
-        if (!user) {
-          return done(null, false, { message: 'cannot find user'});
-        }
-      });
-    }
-  ));
-
-  passport.use('local-login', new LocalStrategy({
-      usernameField: 'email',
-      passwordField: 'password'
-    },
-    function(email, password, done) {
-      User.findOne({email: email}, function(err, user) {
-        if (err) {
-          return done(err);
-        }
-        if (user) {
-
-          //checks if password is correct
-          if (user.verifyPassword(password)) {
-            return done(null, user);
-          }
-          if (!user.verifyPassword(password)) {
-            return done(null, false, { message: 'incorrect password'});
-          }
-        }
-
-        //cannot find user
-        if (!user) {
-          return done(null, false, { message: 'cannot find user'});
-        }
-      });
-    }
-  ));
-
-
   passport.use(new GithubStrategy({
       clientID: configAuth.githubAuth.clientID,
       clientSecret: configAuth.githubAuth.clientSecret,
       callbackURL: configAuth.githubAuth.callbackURL
     },
     function(accessToken, refreshToken, profile, done) {
-      console.log(profile);
-      return done(null, profile);
+      var fullName = profile.displayName,
+          githubId = profile.id,
+          firstName = fullName.split(' ').slice(0, 1).join(' '),
+          lastName = fullName.split(' ').slice(-1).join(' '),
+          email = profile.emails[0].value;
+      
+      User.findOne({githubId: githubId}, function(err, user) {
+        if (err) {
+          return done(err);
+        }
+
+        //if email already in database then send message back
+        if (user) {
+          return done(null, false, { message: 'User Already Exists'});
+        }
+
+        // if email is not used then proocess to next
+        if (!user) {
+          User.create({
+            githubId: githubId,
+            email: email,
+            firstName: firstName,
+            lastName: lastName
+          }, function(err, createdUser) {
+            return done(null, createdUser);
+          });
+        }
+      });
     }
   ));
-
 };
