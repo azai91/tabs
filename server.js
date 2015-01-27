@@ -1,6 +1,83 @@
-var express = require('express'),
-    path    = require('path');
+var express                = require('express'),
+    fs                     = require('fs'),
+    morgan                 = require('morgan');
+    mongoose               = require('mongoose'),
+    passport               = require('passport'),
+    cookieParser           = require('cookie-parser'),
+    bodyParser             = require('body-parser'),
+    session                = require('express-session'),
+    mongoURI               = require('./server/config/database'),
+    userController         = require('./server/users/userController'),
+    messageController      = require('./server/messages/messageController'),
+    conversationController = require('./server/conversations/conversationController');
 
 var app = express();
 
-app.use(express.static(path.join(__dirname, "../client")));
+mongoose.connect(mongoURI.URI);
+
+app.use(express.static(__dirname));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// create a write stream (flags: a, means it only opens to append)
+var logStream = fs.createWriteStream(__dirname + '/logfile.log', {flags: 'a'})
+
+// setup the logger
+app.use(morgan('dev', {stream: logStream}))
+
+app.use(cookieParser());
+
+app.use(session({
+// does it matter what the secret is?
+  secret: 'alcajo',
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./server/config/passport')(passport);
+
+// accepts query for a skill and returns an array of users who teach that skill
+app.post('/search', userController.searchForSkill);
+
+// returns conversations array for the user
+app.get('/messages', userController.isLoggedIn, conversationController.getConversations);
+
+// adds incoming message to database if user is logged in
+app.post('/messages', userController.isLoggedIn, conversationController.saveToConversation);
+
+//returns users array to the user
+app.get('/users', userController.isLoggedIn, userController.getUsers);
+
+// logs user out using passports .logout() functionality
+app.get('/logout', userController.logout);
+
+app.get('/auth/github',
+  passport.authenticate('github', { scope: [ 'user:email' ] }));
+
+// handle the callback after github has authenticated the user
+app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+    console.log('successssss');
+  });
+
+// app.get('/auth/github/callback', function(req, res, next) {
+//   passport.authenticate('github', function(err, user, info) {
+//     if (err) { return next(err); }
+//     if (!user) { console.log('no user found'); } //redirect to login
+//     req.logIn(user, function(err) {
+//       if (err) { return next(err); }
+//       console.log('logged in successfully'); //redirect to homepage
+//     });
+//   })(req, res, next);
+// });
+
+var port = process.env.PORT || 3000;
+
+app.listen(port);
+
+console.log('Server now listening on port ' + port);
