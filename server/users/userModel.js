@@ -19,6 +19,10 @@ var userSchema = new Schema({
   student: Boolean,
   guide: Boolean,
   interests: String,
+  accessToken: String,
+  githubUsername: String,
+  githubRepos: [],
+  languages: [],
   conversations: [{ type: Schema.Types.ObjectId, ref: 'Conversation' }]
 });
 

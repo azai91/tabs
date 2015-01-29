@@ -56,14 +56,11 @@ app.get('/users', userController.isLoggedIn, userController.getUsers);
 app.get('/logout', userController.logout);
 
 app.get('/auth/github',
-  passport.authenticate('github', { scope: [ 'user:email' ] }));
+  passport.authenticate('github', 
+    { scope: [ 'user', 'repo'] }));
 
 // handle the callback after github has authenticated the user
-app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-    console.log('successssss');
-  });
+app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), userController.saveRepos);
 
 // app.get('/auth/github/callback', function(req, res, next) {
 //   passport.authenticate('github', function(err, user, info) {
