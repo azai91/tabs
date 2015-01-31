@@ -16,7 +16,6 @@ var github = new GitHubApi({
   version: "3.0.0"
 });
 
-
 function saveRepos(req, res) {
   var githubUsername = req.user.githubUsername;
   var githubId = req.user.githubId;
