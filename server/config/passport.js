@@ -23,8 +23,12 @@ module.exports = function(passport) {
       callbackURL: configAuth.githubAuth.callbackURL
     },
     function(accessToken, refreshToken, profile, done) {
+      // console.log("accessToken", accessToken);
+      // console.log("refreshToken", refreshToken);
+      // console.log("profile", profile);
       var fullName = profile.displayName,
           githubId = profile.id,
+          githubUsername = profile.username,
           firstName = fullName.split(' ').slice(0, 1).join(' '),
           lastName = fullName.split(' ').slice(-1).join(' '),
           email = profile.emails[0].value;
@@ -36,6 +40,7 @@ module.exports = function(passport) {
 
         //if email already in database then send message back
         if (user) {
+          console.log('ihihihi');
           return done(null, false, { message: 'User Already Exists'});
         }
 
@@ -45,7 +50,9 @@ module.exports = function(passport) {
             githubId: githubId,
             email: email,
             firstName: firstName,
-            lastName: lastName
+            lastName: lastName,
+            accessToken: accessToken,
+            githubUsername: githubUsername
           }, function(err, createdUser) {
             return done(null, createdUser);
           });
