@@ -7,6 +7,16 @@ var Navigation = Router.Navigation;
 var FluxLogin = React.createClass({
   mixins: [Navigation],
 
+  // handleLoginSubmit: function() {
+  //   // var loginObject = {
+  //   //   email: this.state.email,
+  //   //   password: this.state.password
+  //   // };
+
+  //   AuthAPI.handleLoginSubmit.call();
+
+  // },
+
   render: function() {
     return (
       <div>
@@ -17,3 +27,5 @@ var FluxLogin = React.createClass({
 });
 
 module.exports = FluxLogin;
+
+// <button type="button" onClick={this.handleLoginSubmit}>Login</button>

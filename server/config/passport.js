@@ -40,11 +40,12 @@ module.exports = function(passport) {
 
         //if email already in database then send message back
         if (user) {
-          console.log('ihihihi');
-          return done(null, false, { message: 'User Already Exists'});
+          console.log('user already exists');
+          user.oldUser = true;
+          return done(null, user);
         }
 
-        // if email is not used then proocess to next
+        // if email is not used then process to next
         if (!user) {
           User.create({
             githubId: githubId,

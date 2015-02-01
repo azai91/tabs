@@ -40,38 +40,48 @@ app.use(passport.session());
 
 require('./server/config/passport')(passport);
 
-// accepts query for a skill and returns an array of users who teach that skill
-app.post('/search', userController.searchForSkill);
+var router = express.Router();
 
-// returns conversations array for the user
-app.get('/messages', userController.isLoggedIn, conversationController.getConversations);
+router.route('/search')
+  // accepts query for a skill and returns an array of users who teach that skill
+  .post(userController.searchForSkill);
 
-// adds incoming message to database if user is logged in
-app.post('/messages', userController.isLoggedIn, conversationController.saveToConversation);
+router.route('/messages')
+  // returns conversations array for the user
+  .get(userController.isLoggedIn, conversationController.getConversations)
+  // adds incoming message to database if user is logged in
+  .post(userController.isLoggedIn, conversationController.saveToConversation);
 
-//returns users array to the user
-app.get('/users', userController.isLoggedIn, userController.getUsers);
+router.route('/users')
+  //returns users array to the user
+  .get(userController.isLoggedIn, userController.getUsers);
 
-// logs user out using passports .logout() functionality
-app.get('/logout', userController.logout);
+router.route('/logout')
+  // logs user out using passports .logout() functionality
+  .get(userController.logout);
 
-app.get('/auth/github',
-  passport.authenticate('github', 
-    { scope: [ 'user', 'repo'] }));
+
+// handle the github authentication, define scopes to which we want access
+router.get('/auth/github', passport.authenticate('github', { scope: [ 'user', 'repo'] }));
 
 // handle the callback after github has authenticated the user
-app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), userController.saveRepos);
+// router.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), userController.saveRepos);
 
-// app.get('/auth/github/callback', function(req, res, next) {
-//   passport.authenticate('github', function(err, user, info) {
-//     if (err) { return next(err); }
-//     if (!user) { console.log('no user found'); } //redirect to login
-//     req.logIn(user, function(err) {
-//       if (err) { return next(err); }
-//       console.log('logged in successfully'); //redirect to homepage
-//     });
-//   })(req, res, next);
-// });
+router.get('/auth/github/callback', function(req, res, next) {
+  console.log("req", req.body);
+  passport.authenticate('github', function(err, user, info) {
+    if (err) { console.log('ERROR!!!!'); return next(err); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      console.log('logged in successfully'); //redirect to homepage
+      if (!user.oldUser) { next(); }
+      res.sendStatus(200, 'logged in');
+    });
+  })(req, res, next);
+}, userController.saveRepos);
+
+app.use('/', router);
+
 
 var port = process.env.PORT || 3000;
 
