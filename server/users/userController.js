@@ -8,7 +8,7 @@ userController.getUsers = getUsers;
 userController.addRemainingDetails = addRemainingDetails;
 userController.isLoggedIn = isLoggedIn;
 userController.logout = logout;
-userController.searchForSkill = searchForSkill;
+userController.searchForTechnology = searchForTechnology;
 userController.addConversationToUsers = addConversationToUsers;
 userController.saveRepos = saveRepos;
 
@@ -39,7 +39,7 @@ function saveRepos(req, res) {
     // console.log("res", getLanguages(res));
   });
 
-  res.sendStatus(200,'user created successfully');
+  res.redirect('/')
 
   // github.repos.getContent({user: "programng", repo: "belay-on"}, function(err, res) {
   //     console.log("1234err", err);
@@ -158,9 +158,11 @@ function logout(req, res) {
 }
 
 // sends back all users in an array without password, who have that skill
-function searchForSkill(req, res) {
-  var skill = req.body.skill;
-  User.find({ skills: skill }, function(err, users){
+function searchForTechnology(req, res) {
+  console.log(req.url);
+  console.log(req.params.technology);
+  var technology = req.params.technology;
+  User.find({ skills: technology }, function(err, users){
     res.send(users);
   });
 };

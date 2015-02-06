@@ -11,11 +11,10 @@ module.exports = {
       console.log('failed to retrieve users', err);
     });
   },
-  getSkilledUserData: function(skill) {
+  getSkilledUserData: function(technology) {
     $.ajax({
-      url: '/search',
-      type: 'POST',
-      data: skill,
+      url: '/users/' + technology,
+      type: 'GET',
       success: function(users) {
         FluxUserActions.receiveUsers(users);
       },
