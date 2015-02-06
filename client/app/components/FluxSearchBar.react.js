@@ -4,15 +4,13 @@ var UserAPI = require('../utils/UserAPI');
 var FluxSearchBar = React.createClass({
   getInitialState: function() {
     return {
-      skill: ''
+      technology: ''
     };
   },
   handleSubmit: function() {
-    var skillObject = {
-      skill: this.state.skill
-    };
+    var technology = this.state.technology;
 
-    UserAPI.getSkilledUserData(skillObject);
+    UserAPI.getSkilledUserData(technology);
 
   },
   handleChange: function (key) {
@@ -23,16 +21,16 @@ var FluxSearchBar = React.createClass({
     }.bind(this);
   },
   render: function() {
-    var skill = this.state.skill;
+    var technology = this.state.technology;
 
     return (
       <form>
         <input
           type="text"
-          value={skill}
-          placeholder='Search for a skill'
-          onChange={this.handleChange('skill')} />
-        <button type="button" onClick={this.handleSubmit}>Search</button>
+          value={technology}
+          placeholder='Search for a technology'
+          onChange={this.handleChange('technology')} />
+        <button type="submit" onClick={this.handleSubmit}>Search</button>
       </form>
     );
   }

@@ -22,7 +22,7 @@ module.exports = {
     var _this = this;
     // this.transitionTo('messages');
     $.ajax({
-      url: '/logout',
+      url: '/auth/logout',
       type: 'GET',
       success: function(data) {
         console.log('logout successful');
